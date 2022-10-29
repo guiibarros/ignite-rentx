@@ -22,11 +22,6 @@ describe('Create category controller', () => {
     );
   });
 
-  afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
-  });
-
   it('should be able to create a new category', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentx.com.br',
@@ -67,5 +62,10 @@ describe('Create category controller', () => {
       });
 
     expect(response.status).toBe(400);
+  });
+
+  afterAll(async () => {
+    await connection.dropDatabase();
+    await connection.close();
   });
 });

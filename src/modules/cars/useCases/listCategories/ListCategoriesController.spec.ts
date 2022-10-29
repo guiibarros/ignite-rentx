@@ -22,11 +22,6 @@ describe('List all categories', () => {
     );
   });
 
-  afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
-  });
-
   it('should be able to list all categories', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentx.com.br',
@@ -51,5 +46,10 @@ describe('List all categories', () => {
     expect(response.body.length).toBe(1);
     expect(response.body[0]).toHaveProperty('id');
     expect(response.body[0].name).toEqual('Category supertest');
+  });
+
+  afterAll(async () => {
+    await connection.dropDatabase();
+    await connection.close();
   });
 });
