@@ -13,6 +13,11 @@
       "post": {
         "tags": ["Category"],
         "summary": "Create a category",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Create a new category",
         "requestBody": {
           "content": {
@@ -78,6 +83,11 @@
         "tags": ["Category"],
         "summary": "Create new categories",
         "description": "Create categories by file",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -105,6 +115,11 @@
         "tags": ["Specification"],
         "summary": "Create a specification",
         "description":"Create a new specification",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -120,6 +135,135 @@
           },
           "500": {
             "description": "Specification already exists."
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "Authentication user",
+        "description": "Authentication user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "email@email.com",
+                  "password": "123abc"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created."
+          },
+          "401": {
+            "description": "Email or password incorrect!"
+          }
+        }
+      }
+    },
+    "/cars": {
+      "post": {
+        "tags": ["Car"],
+        "summary": "Register a new car",
+        "description": "Register a new car",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created."
+          },
+          "400": {
+            "description": "Car already exists."
+          },
+          "401": {
+            "description": "Token missing."
+          }
+        }
+      }
+    },
+    "/cars/available": {
+      "get": {
+        "tags": ["Car"],
+        "summary": "list available cars",
+        "description": "List available cars",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "/cars/{id}/images": {
+      "post": {
+        "tags": ["Car"],
+        "summary": "Upload car images",
+        "description": "Upload car images",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Car id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created."
+          },
+          "401": {
+            "description": "Token missing."
           }
         }
       }
@@ -139,6 +283,50 @@
       "example": {
         "name": "Specification name sample",
         "description": "Specification description sample"
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "daily_rate": {
+          "type": "number"
+        },
+        "fine_amount": {
+          "type": "number"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Gol",
+        "brand": "Volkswagen",
+        "description": "Carro Volkswagen Gol",
+        "daily_rate": 120,
+        "fine_amount": 30,
+        "license_plate": "ABC-123",
+        "category_id": "60915f99-44e3-4a0a-889e-cf9675de89e6"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
