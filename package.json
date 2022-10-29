@@ -7,7 +7,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch ./node_modules --inspect --transpile-only ./src/shared/infra/http/server.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "seed:admin": "ts-node -r tsconfig-paths/register ./src/shared/infra/typeorm/seeds/admin.ts",
-    "test": "NODE_ENV=test jest --runInBand"
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
