@@ -99,8 +99,21 @@ Regras das funcionalidades, limitações. Ex: não deve cadastrar uma categoria 
 
 **RF**
 
-- [ ] Deve ser possível realizar a busca de todos os alugueis para o usuário.
+- [X] Deve ser possível realizar a busca de todos os alugueis para o usuário.
 
 **RN**
 
-- [ ] O usuário deve estar logado na aplicação.
+- [X] O usuário deve estar logado na aplicação.
+
+## Recuperação de senha
+
+**RF**
+
+- [X] Deve ser possível o usuário recuperar senha informando o e-mail;
+- [X] O usuário deve receber um e-mail com instruções para recuperação de senha;
+- [X] O usuário deve conseguir inserir a nova senha.
+
+**RN**
+
+- [X] O usuário precisa informar uma nova senha;
+- [X] O link enviado para recuperação deve expirar em 3 horas.
