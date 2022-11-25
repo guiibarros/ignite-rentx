@@ -80,6 +80,7 @@
                 "accessibility": "explicit"
             }
         ],
+        "@typescript-eslint/no-empty-function": "warn",
         "no-useless-return": "off"
     },
     "settings": {
