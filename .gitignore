@@ -1,4 +1,6 @@
 node_modules
+.vscode
+coverage
 
 tmp/avatar/*
 !tmp/avatar/.gitkeep
@@ -6,4 +8,3 @@ tmp/avatar/*
 tmp/cars/*
 !tmp/cars/.gitkeep
 
-.vscode
