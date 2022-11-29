@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
+import 'dotenv/config';
 import swaggerUi from 'swagger-ui-express'; // Biblioteca de documentação de API
 
 import 'reflect-metadata'; // Dependência do typeorm e do TSyringe
