@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express'; // Biblioteca de documentação de A
 import 'reflect-metadata'; // Dependência do typeorm e do TSyringe
 import '@shared/container'; // Container do TSyringe
 
+import upload from '@config/upload';
 import { AppError } from '@shared/errors/AppError';
 import createConnection from '@shared/infra/typeorm'; // Conexão com banco de dados
 
@@ -38,5 +39,8 @@ app.use(
 );
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile)); // Integrar swagger
+
+app.use('/avatar', express.static(`${upload.tmpFolder}/avatar`));
+app.use('/cars', express.static(`${upload.tmpFolder}/cars`));
 
 export { app };
