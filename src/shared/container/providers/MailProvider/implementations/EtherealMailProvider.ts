@@ -6,9 +6,11 @@ import {
   getTestMessageUrl,
   Transporter,
 } from 'nodemailer';
+import { injectable } from 'tsyringe';
 
 import { IMailProvider } from '../IMailProvider';
 
+@injectable()
 class EtherealMailProvider implements IMailProvider {
   private client: Transporter;
 
