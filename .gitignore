@@ -1,11 +1,10 @@
 node_modules
 .vscode
 coverage
+dist
 
-tmp/avatar/*
-!tmp/avatar/.gitkeep
-
-tmp/cars/*
-!tmp/cars/.gitkeep
+tmp/*
+!tmp/.gitkeep
 
 .env
+ormconfig.json
