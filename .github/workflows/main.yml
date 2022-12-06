@@ -48,5 +48,6 @@ jobs:
             cd ~/app
             yarn
             yarn typeorm migration:run
+            docker-compose up -d
             pm2 restart rentx_api --update-env
 
