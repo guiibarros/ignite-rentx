@@ -1,4 +1,6 @@
 version: "3.8" # Versão de suporte do docker. 3.8 suporta o docker 19 ou superior
+
+
 services: # Cada serviço é um container
   database: # Container do postgres
     image: postgres # Usamos uma imagem já feita do postgres
@@ -14,21 +16,29 @@ services: # Cada serviço é um container
       - POSTGRES_DB=rentx
     volumes:
       - pgdata:/data/postgres # Cria um diretório do postgres referenciando os dados do driver
-  app: # Rentx container
-    build: . # Quando executar o comando build, então utiliza as configurações do Dockerfile
-    container_name: rentx # Nome do container
-    ports:
-      - 3333:3333 # Tunnel de referência entre a porta do docker e da maquina fisica
 
-    # Cria um volume com o diretório do container linkado no projeto atual. Responsável por refletir alterações
-    volumes:
-      - .:/usr/app
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+
+  # app: # Rentx container
+  #   build: . # Quando executar o comando build, então utiliza as configurações do Dockerfile
+  #   container_name: rentx # Nome do container
+  #   ports:
+  #     - 3333:3333 # Tunnel de referência entre a porta do docker e da maquina fisica
+
+  #   # Cria um volume com o diretório do container linkado no projeto atual. Responsável por refletir alterações
+  #   volumes:
+  #     - .:/usr/app
     
-    # Os dois containers estão com IP diferentes, estes comandos fazem uma ligação entre eles
-    links:
-      - database
-    depends_on:
-      - database
+  #   # Os dois containers estão com IP diferentes, estes comandos fazem uma ligação entre eles
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
+
+
 volumes: # Criação de volumes
   pgdata:
     driver: local # Referência aos dados do driver do postgres, que está instalado localmente no projeto (node_modules)

@@ -12,6 +12,7 @@ import { AppError } from '@shared/errors/AppError';
 import createConnection from '@shared/infra/typeorm'; // Conexão com banco de dados
 
 import swaggerFile from '../../../swagger.json'; // Arquivo de setup do swagger
+import { rateLimiter } from './middlewares/rateLimiter';
 import { routes } from './routes';
 
 createConnection();
@@ -20,6 +21,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(rateLimiter);
 app.use(routes);
 app.use(
   (
