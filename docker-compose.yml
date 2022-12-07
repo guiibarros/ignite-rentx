@@ -5,7 +5,6 @@ services: # Cada serviço é um container
   database: # Container do postgres
     image: postgres # Usamos uma imagem já feita do postgres
     container_name: database_rentx # Nome do container
-    restart: always # Sempre reiniciar
 
     # Dados básicos do postgres, assim como qualquer outro sgdb.
     ports:
